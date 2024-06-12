@@ -59,10 +59,7 @@ const StudentForm = () => {
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="py-[2.5em] px-[50px] ">
         <div className="">
-          <label
-            className="block text-[#015e94] font-bold mb-2"
-            htmlFor="firstName"
-          >
+          <label className="block text-[#015e94] font-bold mb-2">
             Student Name
           </label>
           <div className="flex space-x-4 mb-5">
@@ -70,12 +67,16 @@ const StudentForm = () => {
               <input
                 className="p-2 border border-[#005875] rounded focus:border-[#005875]"
                 type="text"
+                id="firstName"
                 placeholder="First Name"
                 {...register("firstName", {
                   required: "First Name is required",
                 })}
               />
-              <label className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76]">
+              <label
+                htmlFor="firstName"
+                className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76]"
+              >
                 First Name
               </label>
               {errors.firstName && (
@@ -90,9 +91,7 @@ const StudentForm = () => {
                 type="text"
                 id="middle"
                 placeholder="Middle Name"
-                {...register("middleName", {
-                  required: "MIddle Name is required",
-                })}
+                {...register("middleName")}
               />
               <label
                 htmlFor="middle"
@@ -100,20 +99,19 @@ const StudentForm = () => {
               >
                 Middle Name
               </label>
-              {errors.lastName && (
-                <p className="text-red-500 text-[13px] ml-[2px]">
-                  {errors.middleName.message}
-                </p>
-              )}
             </div>
             <div className="w-1/3 flex flex-col  ">
               <input
                 className="p-2 border border-[#005875] rounded focus:border-[#005875]"
                 type="text"
+                id="lastName"
                 placeholder="Last Name"
                 {...register("lastName", { required: "Last Name is required" })}
               />
-              <label className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76]">
+              <label
+                className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76]"
+                htmlFor="lastName"
+              >
                 Last Name
               </label>
               {errors.lastName && (
@@ -270,9 +268,7 @@ const StudentForm = () => {
               className="w-full p-2 border border-[#015e94]  rounded bg-[#fff] text-[#0f5d9d] "
               type="text"
               id="adress2"
-              {...register("addressLine2", {
-                required: "Street Address Line 2  is required",
-              })}
+              {...register("addressLine2")}
             />{" "}
             <label
               className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76]"
@@ -280,11 +276,6 @@ const StudentForm = () => {
             >
               Street Address Line 2
             </label>
-            {errors.address && (
-              <p className="text-red-500 text-[11px] mt-[6px] ml-[2px]">
-                {errors.addressLine2.message}
-              </p>
-            )}
           </div>
           <div className="flex gap-[30px]">
             <div className="w-[50%] flex flex-col mb-2">
@@ -507,7 +498,7 @@ const StudentForm = () => {
           </div>
         </div>
 
-        <div className="mb-4 ">
+        <div className="mb-6 ">
           <label
             className="block text-[#015e97] font-bold mb-2"
             htmlFor="additionalComments"
@@ -522,12 +513,14 @@ const StudentForm = () => {
           />
         </div>
 
-        <button
-          className="w-full bg-[#005875] text-white p-2 rounded-md font-bold"
-          type="submit"
-        >
-          Submit
-        </button>
+        <div className="flex justify-center border-t border-t-[#005875] pt-[30px]">
+          <button
+            className=" py-[10px] px-[60px] hover:bg-[#fff] hover:text-[#005875] border-[#005875] border  bg-[#005875] text-white p-2 rounded-md font-bold"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
