@@ -1,6 +1,7 @@
 // src/StudentForm.js
 import React from "react";
 import { useForm } from "react-hook-form";
+import { InputMask } from "primereact/inputmask";
 
 const months = [
   "January",
@@ -47,325 +48,482 @@ const StudentForm = () => {
   const years = generateYears(1990, 2024);
 
   return (
-    <div className="  p-8 bg-blue-50 rounded-md ">
-      <h1 className="text-2xl font-bold text-center text-blue-900 mb-4">
-        Registration Form
-      </h1>
-      <p className="text-center text-gray-600 mb-6">
-        Fill out the form carefully for registration
-      </p>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-4">
+    <div className="  bg-blue-50 rounded-md ">
+      <div className="py-[2.5em] px-[50px] border-b border-b-[#03597e]">
+        <h1 className="text-[2em]  text-[#005875] font-semibold ">
+          Registration Form
+        </h1>
+        <p className=" text-[1em] text-[#03597e]">
+          Fill out the form carefully for registration
+        </p>
+      </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="py-[2.5em] px-[50px] ">
+        <div className="">
           <label
-            className="block text-blue-900 font-bold mb-2"
+            className="block text-[#015e94] font-bold mb-2"
             htmlFor="firstName"
           >
             Student Name
           </label>
-          <div className="flex space-x-4">
-            <input
-              className="w-1/3 p-2 border border-gray-300 rounded"
-              type="text"
-              placeholder="First Name"
-              {...register("firstName", { required: "First Name is required" })}
-            />
-            <input
-              className="w-1/3 p-2 border border-gray-300 rounded"
-              type="text"
-              placeholder="Middle Name"
-              {...register("middleName")}
-            />
-            <input
-              className="w-1/3 p-2 border border-gray-300 rounded"
-              type="text"
-              placeholder="Last Name"
-              {...register("lastName", { required: "Last Name is required" })}
-            />
+          <div className="flex space-x-4 mb-5">
+            <div className="w-1/3 flex flex-col ">
+              <input
+                className="p-2 border border-[#005875] rounded focus:border-[#005875]"
+                type="text"
+                placeholder="First Name"
+                {...register("firstName", {
+                  required: "First Name is required",
+                })}
+              />
+              <label className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76]">
+                First Name
+              </label>
+              {errors.firstName && (
+                <p className="text-red-500 text-[13px] ml-[2px]">
+                  {errors.firstName.message}
+                </p>
+              )}
+            </div>
+            <div className="w-1/3 flex flex-col">
+              <input
+                className="p-2 border border-[#005875] rounded focus:border-[#005875]"
+                type="text"
+                id="middle"
+                placeholder="Middle Name"
+                {...register("middleName", {
+                  required: "MIddle Name is required",
+                })}
+              />
+              <label
+                htmlFor="middle"
+                className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76]"
+              >
+                Middle Name
+              </label>
+              {errors.lastName && (
+                <p className="text-red-500 text-[13px] ml-[2px]">
+                  {errors.middleName.message}
+                </p>
+              )}
+            </div>
+            <div className="w-1/3 flex flex-col  ">
+              <input
+                className="p-2 border border-[#005875] rounded focus:border-[#005875]"
+                type="text"
+                placeholder="Last Name"
+                {...register("lastName", { required: "Last Name is required" })}
+              />
+              <label className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76]">
+                Last Name
+              </label>
+              {errors.lastName && (
+                <p className="text-red-500 text-[13px] ml-[2px]">
+                  {errors.lastName.message}
+                </p>
+              )}
+            </div>
           </div>
-          {errors.firstName && (
-            <p className="text-red-500 text-sm">{errors.firstName.message}</p>
-          )}
-          {errors.lastName && (
-            <p className="text-red-500 text-sm">{errors.lastName.message}</p>
-          )}
         </div>
 
-        <div className="mb-4">
-          <label
-            className="block text-blue-900 font-bold mb-2"
-            htmlFor="birthDate"
-          >
-            Birth Date
-          </label>
-          <div className="flex space-x-4">
-            <select
-              className="w-1/3 p-2 border border-gray-300 rounded"
-              {...register("birthMonth", { required: "Month is required" })}
+        <div className="flex gap-[30px]">
+          <div className="mb-4 w-[50%]">
+            <label
+              className="block text-[#015e94] font-bold mb-2"
+              htmlFor="birthDate"
             >
-              <option value="">Please</option>
-              {months.map((month, index) => (
-                <option key={index} value={month}>
-                  {month}
-                </option>
-              ))}
-            </select>
-            <select
-              className="w-1/3 p-2 border border-gray-300 rounded"
-              {...register("birthDay", { required: "Day is required" })}
-            >
-              <option value="">Please</option>
-              {days.map((day, index) => (
-                <option key={index} value={day}>
-                  {day}
-                </option>
-              ))}
-            </select>
-            <select
-              className="w-1/3 p-2 border border-gray-300 rounded"
-              {...register("birthYear", { required: "Year is required" })}
-            >
-              <option value="">Please</option>
-              {years.map((year, index) => (
-                <option key={index} value={year}>
-                  {year}
-                </option>
-              ))}
-            </select>
+              Birth Date
+            </label>
+            <div className="flex space-x-4">
+              <div className="flex flex-col">
+                <select
+                  id="month"
+                  className=" p-2 border border-[#015e94] rounded bg-[#fff] text-[#0f5d9d]"
+                  {...register("birthMonth", { required: "Month is required" })}
+                >
+                  <option value="">Please</option>
+                  {months.map((month, index) => (
+                    <option key={index} value={month}>
+                      {month}
+                    </option>
+                  ))}
+                </select>
+                <label
+                  className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76] "
+                  htmlFor="month"
+                >
+                  Month
+                </label>
+                {errors.birthMonth && (
+                  <p className="text-red-500 text-[11px] ml-[2px]">
+                    {errors.birthMonth.message}
+                  </p>
+                )}
+              </div>
+              <div className="flex flex-col">
+                <select
+                  id="day"
+                  className=" p-2 border border-[#015e94] rounded bg-[#fff] text-[#0f5d9d]"
+                  {...register("birthDay", { required: "Day is required" })}
+                >
+                  <option value="">Please</option>
+                  {days.map((day, index) => (
+                    <option key={index} value={day}>
+                      {day}
+                    </option>
+                  ))}
+                </select>
+                <label
+                  htmlFor="day"
+                  className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76]"
+                >
+                  Day
+                </label>
+                {errors.birthDay && (
+                  <p className="text-red-500 text-[11px] ml-[2px]">
+                    {errors.birthDay.message}
+                  </p>
+                )}
+              </div>
+              <div className="flex flex-col">
+                <select
+                  className=" p-2 border border-[#015e94] rounded bg-[#fff] text-[#0f5d9d]"
+                  {...register("birthYear", { required: "Year is required" })}
+                  id="year"
+                >
+                  <option value="">Please</option>
+                  {years.map((year, index) => (
+                    <option key={index} value={year}>
+                      {year}
+                    </option>
+                  ))}
+                </select>
+                <label
+                  className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76]"
+                  htmlFor="year"
+                >
+                  Year
+                </label>
+                {errors.birthYear && (
+                  <p className="text-red-500 text-[11px] ml-[2px]">
+                    {errors.birthYear.message}
+                  </p>
+                )}
+              </div>
+            </div>
           </div>
-          {errors.birthMonth && (
-            <p className="text-red-500 text-sm">{errors.birthMonth.message}</p>
-          )}
-          {errors.birthDay && (
-            <p className="text-red-500 text-sm">{errors.birthDay.message}</p>
-          )}
-          {errors.birthYear && (
-            <p className="text-red-500 text-sm">{errors.birthYear.message}</p>
-          )}
+
+          <div className="mb-4 w-[50%]">
+            <label
+              className="block text-[#015e94] font-bold mb-2"
+              htmlFor="gender"
+            >
+              Gender
+            </label>
+            <select
+              id="gender"
+              className="w-full p-2 border border-[#015e94] rounded bg-[#fff] text-[#0f5d9d]"
+              {...register("gender", { required: "Gender is required" })}
+            >
+              <option value="">Please Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+            {errors.gender && (
+              <p className="text-red-500 text-[11px] mt-[6px] ml-[2px]">
+                {errors.gender.message}
+              </p>
+            )}
+          </div>
         </div>
 
         <div className="mb-4">
           <label
-            className="block text-blue-900 font-bold mb-2"
-            htmlFor="gender"
-          >
-            Gender
-          </label>
-          <select
-            className="w-full p-2 border border-gray-300 rounded"
-            {...register("gender", { required: "Gender is required" })}
-          >
-            <option value="">Please Select</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-          {errors.gender && (
-            <p className="text-red-500 text-sm">{errors.gender.message}</p>
-          )}
-        </div>
-
-        <div className="mb-4">
-          <label
-            className="block text-blue-900 font-bold mb-2"
+            className="block text-[#015e94] font-bold mb-2"
             htmlFor="address"
           >
             Address
           </label>
-          <input
-            className="w-full p-2 border border-gray-300 rounded mb-2"
-            type="text"
-            placeholder="Street Address"
-            {...register("address", { required: "Street Address is required" })}
-          />
-          <input
-            className="w-full p-2 border border-gray-300 rounded mb-2"
-            type="text"
-            placeholder="Street Address Line 2"
-            {...register("addressLine2")}
-          />
-          <div className="flex space-x-4 mb-2">
+          <div className="pb-6">
             <input
-              className="w-1/2 p-2 border border-gray-300 rounded"
+              className="w-full p-2 border border-[#015e94]  rounded bg-[#fff] text-[#0f5d9d] "
               type="text"
-              placeholder="City"
-              {...register("city", { required: "City is required" })}
+              id="adress1"
+              {...register("address", {
+                required: "Street Address is required",
+              })}
             />
+            <label
+              className="text-[.75em] ml-[2px] mt-[13px] text-[#205a76]"
+              htmlFor="adress1"
+            >
+              Street Address
+            </label>
+            {errors.address && (
+              <p className="text-red-500 text-[11px] mt-[6px] ml-[2px]">
+                {errors.address.message}
+              </p>
+            )}
+          </div>
+          <div className="pb-6">
             <input
-              className="w-1/2 p-2 border border-gray-300 rounded"
+              className="w-full p-2 border border-[#015e94]  rounded bg-[#fff] text-[#0f5d9d] "
               type="text"
-              placeholder="State / Province"
-              {...register("state", { required: "State is required" })}
+              id="adress2"
+              {...register("addressLine2", {
+                required: "Street Address Line 2  is required",
+              })}
+            />{" "}
+            <label
+              className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76]"
+              htmlFor="adress2"
+            >
+              Street Address Line 2
+            </label>
+            {errors.address && (
+              <p className="text-red-500 text-[11px] mt-[6px] ml-[2px]">
+                {errors.addressLine2.message}
+              </p>
+            )}
+          </div>
+          <div className="flex gap-[30px]">
+            <div className="w-[50%] flex flex-col mb-2">
+              <input
+                className="w-full p-2 border border-[#015e94]  rounded bg-[#fff] text-[#0f5d9d] "
+                type="text"
+                placeholder="City"
+                id="city"
+                {...register("city", { required: "City is required" })}
+              />
+              <label
+                className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76]"
+                htmlFor="city"
+              >
+                City
+              </label>
+              {errors.city && (
+                <p className="text-red-500 text-[11px] mt-[6px] ml-[2px]">
+                  {errors.city.message}
+                </p>
+              )}
+            </div>
+            <div className=" w-[50%] flex flex-col">
+              <input
+                className="w-full p-2 border border-[#015e94]  rounded bg-[#fff] text-[#0f5d9d] "
+                type="text"
+                id="state"
+                {...register("state", { required: "State is required" })}
+              />
+              <label
+                className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76]"
+                htmlFor="state"
+              >
+                State / Province
+              </label>
+              {errors.state && (
+                <p className="text-red-500 text-[11px] mt-[6px] ml-[2px]">
+                  {errors.state.message}
+                </p>
+              )}
+            </div>
+          </div>
+          <div className="pb-6">
+            <input
+              className="w-full p-2 border border-[#015e94]  rounded bg-[#fff] text-[#0f5d9d] "
+              type="text"
+              id="zip"
+              {...register("postalCode", {
+                required: "Postal / Zip Code is required",
+              })}
+            />
+            <label
+              className="text-[.75em] ml-[2px] mt-[11px] text-[#205a76]"
+              htmlFor="zip"
+            >
+              Postal / Zip Code
+            </label>
+            {errors.postalCode && (
+              <p className="text-red-500 text-[11px] mt-[6px] ml-[2px]">
+                {errors.postalCode.message}
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="flex gap-[30px]">
+          <div className="mb-4 w-[50%]">
+            <label
+              className="block text-[#015e97] font-bold mb-2"
+              htmlFor="email"
+            >
+              Student E-mail
+            </label>
+            <input
+              className="w-full p-2 border border-[#015e94]  rounded bg-[#fff] text-[#0f5d9d] "
+              type="email"
+              id="email"
+              placeholder="ex: myname@example.com"
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: "Invalid email address",
+                },
+              })}
+            />
+            <label className="text-[.75em] ml-[2px] mt-[13px] text-[#205a76]">
+              example@example.com
+            </label>
+            {errors.email && (
+              <p className="text-red-500 text-[11px] mt-[6px] ml-[2px]">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
+
+          <div className="mb-4 w-[50%]">
+            <label
+              className="block text-[#015e97] font-bold mb-2"
+              htmlFor="mobileNumber"
+            >
+              Mobile Number
+            </label>
+            <InputMask
+              id="mobileNumber"
+              className="w-full p-2 border border-[#015e94]  rounded bg-[#fff] text-[#0f5d9d] "
+              mask="(999) 999-9999"
+              placeholder="(000) 000-0000"
+              {...register("mobileNumber", {
+                required: "Mobile Number is required",
+                pattern: {
+                  value: /^\(\d{3}\) \d{3}-\d{4}$/,
+                  message: "Invalid mobile number format",
+                },
+              })}
+            ></InputMask>
+            {errors.mobileNumber && (
+              <p className="text-red-500 text-[11px] mt-[6px] ml-[2px]">
+                {errors.mobileNumber.message}
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="flex gap-[30px]">
+          <div className="mb-4 w-[50%]">
+            <label
+              htmlFor="phone"
+              className="block text-[#015e97] font-bold mb-2"
+            >
+              Phone
+            </label>
+            <InputMask
+              id="phone"
+              className="w-full p-2 border border-[#015e94]  rounded bg-[#fff] text-[#0f5d9d] "
+              mask="(999) 999-9999"
+              placeholder="(000) 000-0000"
+              {...register("phoneNumber", {
+                pattern: {
+                  value: /^\(\d{3}\) \d{3}-\d{4}$/,
+                  message: "Invalid phone number format",
+                },
+              })}
+            ></InputMask>
+            {errors.phoneNumber && (
+              <p className="text-red-500 text-[11px] mt-[6px] ml-[2px]">
+                {errors.phoneNumber.message}
+              </p>
+            )}
+          </div>
+
+          <div className="mb-4 w-[50%]">
+            <label
+              className="block text-[#015e97] font-bold mb-2"
+              htmlFor="workNumber"
+            >
+              Work Number
+            </label>
+            <InputMask
+              id="workNumber"
+              className="w-full p-2 border border-[#015e94]  rounded bg-[#fff] text-[#0f5d9d] "
+              mask="(999) 999-9999"
+              placeholder="(000) 000-0000"
+              {...register("workNumber", {
+                pattern: {
+                  value: /^\(\d{3}\) \d{3}-\d{4}$/,
+                  message: "Invalid work number format",
+                },
+              })}
+            ></InputMask>
+            {errors.workNumber && (
+              <p className="text-red-500 text-sm">
+                {errors.workNumber.message}
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="flex gap-[30px]">
+          <div className="mb-4 w-[50%]">
+            <label
+              className="block text-[#015e97] font-bold mb-2"
+              htmlFor="company"
+            >
+              Company
+            </label>
+            <input
+              className="w-full p-2 border border-[#015e94] rounded bg-[#fff] text-[#0f5d9d]"
+              type="text"
+              id="company"
+              placeholder="Company"
+              {...register("company", {
+                required: "Company is required",
+              })}
             />
           </div>
-          <input
-            className="w-full p-2 border border-gray-300 rounded"
-            type="text"
-            placeholder="Postal / Zip Code"
-            {...register("postalCode", {
-              required: "Postal / Zip Code is required",
-            })}
-          />
-          {errors.address && (
-            <p className="text-red-500 text-sm">{errors.address.message}</p>
-          )}
-          {errors.city && (
-            <p className="text-red-500 text-sm">{errors.city.message}</p>
-          )}
-          {errors.state && (
-            <p className="text-red-500 text-sm">{errors.state.message}</p>
-          )}
-          {errors.postalCode && (
-            <p className="text-red-500 text-sm">{errors.postalCode.message}</p>
-          )}
+
+          <div className="mb-4 w-[50%]">
+            <label
+              className="block text-blue-900 font-bold mb-2"
+              htmlFor="courses"
+            >
+              Courses
+            </label>
+            <select
+              id="courses"
+              className=" w-full p-2 border border-[#015e94] rounded bg-[#fff] text-[#0f5d9d]"
+              {...register("courses", {
+                required: "Course selection is required",
+              })}
+            >
+              <option value="">Please Select</option>
+              <option value="course1">Course 1</option>
+              <option value="course2">Course 2</option>
+              <option value="course3">Course 3</option>
+            </select>
+            {errors.courses && (
+              <p className="text-red-500 text-sm">{errors.courses.message}</p>
+            )}
+          </div>
         </div>
 
-        <div className="mb-4">
-          <label className="block text-blue-900 font-bold mb-2" htmlFor="email">
-            Student E-mail
-          </label>
-          <input
-            className="w-full p-2 border border-gray-300 rounded"
-            type="email"
-            placeholder="ex: myname@example.com"
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^\S+@\S+$/i,
-                message: "Invalid email address",
-              },
-            })}
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
-          )}
-        </div>
-
-        <div className="mb-4">
+        <div className="mb-4 ">
           <label
-            className="block text-blue-900 font-bold mb-2"
-            htmlFor="mobileNumber"
-          >
-            Mobile Number
-          </label>
-          <input
-            className="w-full p-2 border border-gray-300 rounded"
-            type="tel"
-            placeholder="(000) 000-0000"
-            {...register("mobileNumber", {
-              required: "Mobile Number is required",
-              pattern: {
-                value: /^\(\d{3}\) \d{3}-\d{4}$/,
-                message: "Invalid mobile number format",
-              },
-            })}
-          />
-          {errors.mobileNumber && (
-            <p className="text-red-500 text-sm">
-              {errors.mobileNumber.message}
-            </p>
-          )}
-        </div>
-
-        <div className="mb-4">
-          <label
-            className="block text-blue-900 font-bold mb-2"
-            htmlFor="phoneNumber"
-          >
-            Phone Number
-          </label>
-          <input
-            className="w-full p-2 border border-gray-300 rounded"
-            type="tel"
-            placeholder="(000) 000-0000"
-            {...register("phoneNumber", {
-              pattern: {
-                value: /^\(\d{3}\) \d{3}-\d{4}$/,
-                message: "Invalid phone number format",
-              },
-            })}
-          />
-          {errors.phoneNumber && (
-            <p className="text-red-500 text-sm">{errors.phoneNumber.message}</p>
-          )}
-        </div>
-
-        <div className="mb-4">
-          <label
-            className="block text-blue-900 font-bold mb-2"
-            htmlFor="workNumber"
-          >
-            Work Number
-          </label>
-          <input
-            className="w-full p-2 border border-gray-300 rounded"
-            type="tel"
-            placeholder="(000) 000-0000"
-            {...register("workNumber", {
-              pattern: {
-                value: /^\(\d{3}\) \d{3}-\d{4}$/,
-                message: "Invalid work number format",
-              },
-            })}
-          />
-          {errors.workNumber && (
-            <p className="text-red-500 text-sm">{errors.workNumber.message}</p>
-          )}
-        </div>
-
-        <div className="mb-4">
-          <label
-            className="block text-blue-900 font-bold mb-2"
-            htmlFor="company"
-          >
-            Company
-          </label>
-          <input
-            className="w-full p-2 border border-gray-300 rounded"
-            type="text"
-            placeholder="Company"
-            {...register("company")}
-          />
-        </div>
-
-        <div className="mb-4">
-          <label
-            className="block text-blue-900 font-bold mb-2"
-            htmlFor="courses"
-          >
-            Courses
-          </label>
-          <select
-            className="w-full p-2 border border-gray-300 rounded"
-            {...register("courses", {
-              required: "Course selection is required",
-            })}
-          >
-            <option value="">Please Select</option>
-            <option value="course1">Course 1</option>
-            <option value="course2">Course 2</option>
-            <option value="course3">Course 3</option>
-          </select>
-          {errors.courses && (
-            <p className="text-red-500 text-sm">{errors.courses.message}</p>
-          )}
-        </div>
-
-        <div className="mb-4">
-          <label
-            className="block text-blue-900 font-bold mb-2"
+            className="block text-[#015e97] font-bold mb-2"
             htmlFor="additionalComments"
           >
             Additional Comments
           </label>
           <textarea
-            className="w-full p-2 border border-gray-300 rounded"
+            id="additionalComments"
+            className="w-full p-2 border border-[#015e94]  rounded bg-[#fff] text-[#0f5d9d] "
             placeholder="Additional Comments"
             {...register("additionalComments")}
           />
         </div>
 
         <button
-          className="w-full bg-blue-900 text-white p-2 rounded-md font-bold"
+          className="w-full bg-[#005875] text-white p-2 rounded-md font-bold"
           type="submit"
         >
           Submit
